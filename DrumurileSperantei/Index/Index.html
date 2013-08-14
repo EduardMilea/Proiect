@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+{%block content%}
+{%for x in titlutab%}
+<title>{{x.site_titletab}}</title>
+{%endfor%}
+{%endblock%}
+
+  <meta charset="utf-8">
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+  <link rel="stylesheet" type="text/css" href="styles.css" media="screen" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+
+
+ 
+
+<div STYLE = 'margin-top:110px; ' >
+{%block titlu%}
+{%for x in titlu%}
+<h1 align = "center" STYLE = 'font: 70px Tahoma, Helvetica, Arial, Sans-Serif; color: #222;
+text-shadow: 0px 2px 3px #555;'>{{x.site_title}}</h1>
+{%endfor%}
+{%endblock%}
+</div>
+<div STYLE = 'position:relative;LEFT:-30px;TOP:-147px; HEIGHT:2px; WIDTH:1980px; box-shadow: 20px 6px 7px #000000;'></div>
+<div id = 'headerbar' STYLE = 'margin-top:-140px; '>
+{%block header_image%}
+{%for x in imaginebara%}
+<div ><IMG SRC = '{{ MEDIA_URL }}{{x.picture}}' STYLE = 'position:relative; LEFT:-10px; TOP :-102px; HEIGHT:100px; WIDTH:1980px; box-shadow: 10 10 30px #000000;'>
+</div>
+</head>
+
+{%endfor%}
+{%endblock%}
+<div STYLE = 'position:relative; TOP:-100px; LEFT:1670px'><a href = 'http://localhost:8000/admin' style = 'color:#F5FFFFF'>Log in</a></div>
+<div STYLE = 'position:relative; TOP:-124px; LEFT:1750px'><a href = 'http://localhost:8000/admin' style = 'color:#F5FFFFF'>Sign in</a></div>
+</div>
+<style = css/text>
+body{
+background-image: url('/media/art_pict/4.jpg');
+background-repeat: no-repeat;
+background-size: 1920px 1080px;
+background-attachment: fixed;
+background-position: center;
+}
+ a {text-decoration:none;font-family:Georgia,serif; font-size:20px}
+ a:link {color:white;}
+ a:visited {color:white;}
+ a:hover {text-decoration:none;color:white;font-size:30px;}
+ a:active {color:red;text-decoration: none}
+</style>
+
+<div>
+	<div id = 'content' style = "margin-top:-100px" >
+	{%block content3%}
+	{%for x in articol%}
+	<script> 
+$(document).ready(function(){
+  $("IMG").click(function(){
+    $("#marte").animate({
+      width:'400px',
+      height: '400px'
+    });
+  });
+});
+</script>
+
+	<div id = 'marte' style = 'margin-left:300px; '>
+	<IMG SRC = "{{ MEDIA_URL }}{{x.art_picture}}" STYLE = 'position:relative; TOP:280px; LEFT:80px; WIDTH:250px; HEIGHT:250px; box-shadow: 8px 5px 30px #888888;'>
+
+	</div>
+	
+	<div id = 'content' style = 'margin-right:400px; margin-left:700px; margin-bottom:-80px'>
+    <h2 align = 'center', padding = 'right' style = 'text-shadow: 8px 5px 10px #555; font:chasm;'>{{x.title}}</h2>
+	<h5 align = 'center'> <i>Postat de {{x.author}} in</br> {{x.date_published}}</i></h5>
+	<h3>{{x.text}}</h3>
+	</div>
+	 
+
+	{%endfor%}
+	{%endblock%}
+    {% block cat %}
+    {% for x in categorie %}
+    <div style = "position:relative; TOP:-2300px; color:white; LEFT:10px; font-size: 50px;"><a style = 'a:link color: white;'href = '{{x.get_absolute_url}}'>{{x.title}}</br></a> </div>
+    {% endfor %}
+    {% endblock %}
+	<!--{%block pagini%}
+	{% if articol.object_list and articol.paginator.num_pages > 1 %}
+        <div class="pagination" style="position:relative;  color: white ">
+            <span class="step-links">
+                {% if articol.has_previous %}
+                    <a href= "?page={{ articol.previous_page_number }}">newer entries &lt;&lt; </a>
+                {% endif %}
+
+                <span class="current">
+                    &nbsp;Page {{ articol.number }} of {{ articol.paginator.num_pages }}
+                </span>
+
+                {% if articol.has_next %}
+                    <a href="?page={{ articol.next_page_number }}"> &lt;&lt; older entries</a>
+                {% endif %}
+            </span>
+        </div>
+        {% endif %}
+        {%endblock%}-->
+
+    </div>
+	
+
+</div>
+</div>
+
+	
+
+
+
+
+  
+</body>
+</html>

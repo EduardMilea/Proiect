@@ -1,4 +1,65 @@
-from django.http import HttpResponse
+from Index.models import *
+from django.shortcuts import render_to_response, render, get_object_or_404
+from django.views.generic.base import View
+from django.core.paginator import *
+from django.core.urlresolvers import reverse
 
-def main(request):
-	return HttpResponse('MainPage')
+
+
+
+
+class MainView(View):
+	def get(self,request):
+		return render(request, 'Index.html',{
+			'articol':Article.objects.active(),
+			'titlu':TitlulZilei.objects.all(),
+			'titlutab':TitlulZileiTab.objects.all(),
+			'imaginebara':Picture.objects.all(),
+			'categorie':Category.objects.all(),
+			}
+			)
+
+class CategoryView(View):
+	def get(self, request, category_slug) :
+		category = get_object_or_404(Category, slug=category_slug)
+
+		return render(request,'categories.html',{
+			'category':category,
+			#'cat':Category.objects.all()
+			#'posts':Article.objects.filter(categorie = category)
+			})
+
+class PostView(View):
+	def get(self,slug,request):
+		return render(request,'post.html',{'post':get_object_or_404(Index,slug=slug)})
+
+
+
+
+
+
+
+
+
+
+
+#def main(request):
+#	articol= Article.objects.all()
+#	paginator = Paginator(articol,5)
+#	
+#	try: page = int(request.GET.get("page", '1'))
+#	except ValueError: page = 1
+#	
+#	try:
+#		articol = paginator.page(page)
+#	except (InvalidPage, EmptyPage):
+#		articol = paginator.page(paginator.num_pages)
+#	
+#	return render(request,'Index.html',{
+#		'articol':Article.objects.active(),
+#		'titlu':TitlulZilei.objects.all(),
+#		'titlutab':TitlulZileiTab.objects.all(),
+#		'imaginebara':Picture.objects.all()
+#		}
+#		)
+

@@ -1,0 +1,10 @@
+{% extends 'Index.html' %}
+{% block content %}
+
+{% for post in category.article_set.active %}
+<div>{{post.title}}</div>
+<div>{{post.text}}</div>
+{% endfor %}
+{% endblock %}
+{%block content3%}
+{%endblock%}
