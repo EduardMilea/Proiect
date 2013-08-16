@@ -1,41 +1,45 @@
 <!doctype html>
 <html lang="en">
-{%block content%}
-{%for x in titlutab%}
+{% block content %}
+{% for x in titlutab %}
 <title>{{x.site_titletab}}</title>
-{%endfor%}
-{%endblock%}
+{% endfor %}
+{% endblock %}
 
   <meta charset="utf-8">
   <meta name="description" content="The HTML5 Herald">
   <meta name="author" content="SitePoint">
   <link rel="stylesheet" type="text/css" href="styles.css" media="screen" />
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
-</script>
+  <head>
+  <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<link href="styles.css" rel="stylesheet"  />
+<script type="text/javascript" src="{{MEDIA_URL}}custom.js"></script>
 
 
+    </head>
  
 
 <div STYLE = 'margin-top:110px; ' >
-{%block titlu%}
-{%for x in titlu%}
+{% block titlu %}
+{% for x in titlu %}
 <h1 align = "center" STYLE = 'font: 70px Tahoma, Helvetica, Arial, Sans-Serif; color: #222;
 text-shadow: 0px 2px 3px #555;'>{{x.site_title}}</h1>
-{%endfor%}
-{%endblock%}
+{% endfor %}
+{% endblock %}
 </div>
 <div STYLE = 'position:relative;LEFT:-30px;TOP:-147px; HEIGHT:2px; WIDTH:1980px; box-shadow: 20px 6px 7px #000000;'></div>
 <div id = 'headerbar' STYLE = 'margin-top:-140px; '>
-{%block header_image%}
-{%for x in imaginebara%}
-<div ><IMG SRC = '{{ MEDIA_URL }}{{x.picture}}' STYLE = 'position:relative; LEFT:-10px; TOP :-102px; HEIGHT:100px; WIDTH:1980px; box-shadow: 10 10 30px #000000;'>
+{% block header_image %}
+{% for x in imaginebara %}
+<div ><IMG SRC = '{{ MEDIA_URL }}{{x.picture}}' STYLE = 'position:relative; LEFT:-10px; TOP :-102px; HEIGHT:100px; WIDTH:1980px; box-shadow:  10 10 30px #000000;'>
 </div>
-</head>
 
-{%endfor%}
-{%endblock%}
+
+{% endfor %}
+{% endblock %}
 <div STYLE = 'position:relative; TOP:-100px; LEFT:1670px'><a href = 'http://localhost:8000/admin' style = 'color:#F5FFFFF'>Log in</a></div>
-<div STYLE = 'position:relative; TOP:-124px; LEFT:1750px'><a href = 'http://localhost:8000/admin' style = 'color:#F5FFFFF'>Sign in</a></div>
+<div STYLE = 'position:relative; TOP:-124px; LEFT:1750px'><a href = 'http://localhost:8000/' style = 'color:#F5FFFFF'>Sign in</a></div>
 </div>
 <style = css/text>
 body{
@@ -45,42 +49,68 @@ background-size: 1920px 1080px;
 background-attachment: fixed;
 background-position: center;
 }
- a {text-decoration:none;font-family:Georgia,serif; font-size:20px}
- a:link {color:white;}
- a:visited {color:white;}
- a:hover {text-decoration:none;color:white;font-size:30px;}
- a:active {color:red;text-decoration: none}
+ a {text-decoration:none;font-family:Georgia,serif; }
+ a:link {text-decoration:none;}
+ a:visited {color:black;}
+ a:hover {text-decoration:none;}
+ a:active {text-decoration: none}
 </style>
 
 <div>
 	<div id = 'content' style = "margin-top:-100px" >
-	{%block content3%}
-	{%for x in articol%}
-	<script> 
-$(document).ready(function(){
-  $("IMG").click(function(){
-    $("#marte").animate({
-      width:'400px',
-      height: '400px'
-    });
-  });
-});
-</script>
+	{% block content3 %}
+	{% with articol|first as x %}
+ 	<script> 
+// $(document).ready(function(){
+//   $("IMG").click(function(){
+//     $("#marte").animate({
+//       width:'400px',
+//       height: '400px'
+//     });
+//   });
+// });
+// </script>
 
 	<div id = 'marte' style = 'margin-left:300px; '>
-	<IMG SRC = "{{ MEDIA_URL }}{{x.art_picture}}" STYLE = 'position:relative; TOP:280px; LEFT:80px; WIDTH:250px; HEIGHT:250px; box-shadow: 8px 5px 30px #888888;'>
+	<IMG SRC = "{{ MEDIA_URL }}{{x.art_picture}}" STYLE = 'position:relative; TOP:250px; LEFT:80px; WIDTH:250px; HEIGHT:250px; box-shadow: 8px 5px 30px #888888;'>
 
 	</div>
 	
-	<div id = 'content' style = 'margin-right:400px; margin-left:700px; margin-bottom:-80px'>
-    <h2 align = 'center', padding = 'right' style = 'text-shadow: 8px 5px 10px #555; font:chasm;'>{{x.title}}</h2>
+	<div id = 'content' style = 'margin-right:400px; margin-left:700px; margin-bottom:-80px; margin-top:-100px;'>
+    
+    <a href = '{{x.get_absolute_url}}'><div ><h2 align = 'center', padding = 'right' style = 'text-shadow: 8px 5px 10px #555; font:chasm;'>{{x.title}}</h2></div>
+   
 	<h5 align = 'center'> <i>Postat de {{x.author}} in</br> {{x.date_published}}</i></h5>
-	<h3>{{x.text}}</h3>
+	<h3>{{x.text|slice:'800'}}...</h3>
 	</div>
 	 
 
-	{%endfor%}
-	{%endblock%}
+	{% endwith %}
+	{% endblock %}
+  {% block f %}
+  <ul style="list-style:none; margin-top:200px; margin-right:100px;">
+  {% for x in articol|slice:'1:' %}
+
+  <li class = 'magie' style="display:inline-block; margin-right:20px;">
+    <div class ='textb' style = 'position:relative;TOP:160px;font-size:20px;color:white;LEFT:30px'>{{x.title}}</br><h6>{{x.text|slice:':30'}}-</br>{{x.text|slice:'30:60'}}</br>{{x.text|slice:'60:90'}}...</h6></div>
+
+  <a class="image"  href="{{x.get_absolute_url}}">
+        <span class="roll" ></span>
+        <img class="imgborder roll" alt="" SRC = "{{ MEDIA_URL }}{{x.art_picture}}" STYLE = 'WIDTH:250px; HEIGHT:250px; box-shadow: 8px 5px 30px #888888;'>  
+             </a>
+      </li>       
+  
+ 
+<!-- HTML STRUCTURE -->
+   
+
+
+  
+  
+  {%endfor%}
+</ul>
+  {% endblock %}
+
     {% block cat %}
     {% for x in categorie %}
     <div style = "position:relative; TOP:-2300px; color:white; LEFT:10px; font-size: 50px;"><a style = 'a:link color: white;'href = '{{x.get_absolute_url}}'>{{x.title}}</br></a> </div>

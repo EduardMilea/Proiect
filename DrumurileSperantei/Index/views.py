@@ -5,7 +5,7 @@ from django.core.paginator import *
 from django.core.urlresolvers import reverse
 
 
-
+#-------------------------------------------------------------------------
 
 
 class MainView(View):
@@ -18,6 +18,7 @@ class MainView(View):
 			'categorie':Category.objects.all(),
 			}
 			)
+#-------------------------------------------------------------------------
 
 class CategoryView(View):
 	def get(self, request, category_slug) :
@@ -25,13 +26,25 @@ class CategoryView(View):
 
 		return render(request,'categories.html',{
 			'category':category,
+			'titlu':TitlulZilei.objects.all(),
+			'titlutab':TitlulZileiTab.objects.all(),
+			'imaginebara':Picture.objects.all(),
+			'categorie':Category.objects.all(),
 			#'cat':Category.objects.all()
 			#'posts':Article.objects.filter(categorie = category)
 			})
+#-------------------------------------------------------------------------
 
 class PostView(View):
-	def get(self,slug,request):
-		return render(request,'post.html',{'post':get_object_or_404(Index,slug=slug)})
+	def get(self,request,slug):
+		post = get_object_or_404(Article,slug=slug)
+		return render(request,'post.html',{
+			'post':post,
+			'titlu':TitlulZilei.objects.all(),
+			'titlutab':TitlulZileiTab.objects.all(),
+			'imaginebara':Picture.objects.all(),
+			}
+			)
 
 
 

@@ -9,7 +9,7 @@ urlpatterns = patterns('',
 	
 	url(r'^$',MainView.as_view()),
 	url(r'^categories/(?P<category_slug>[A-Za-z0-9-_.]+)/$', CategoryView.as_view(), name="category_view"),
-	url(r'^post/(?P<slug>[A-Za-z0-9-_.]+)/$',PostView.as_view()),
+	url(r'^post/(?P<slug>[A-Za-z0-9-_.]+)/$',PostView.as_view(),name = "post_view"),
 
 	
 

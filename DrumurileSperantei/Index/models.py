@@ -15,13 +15,13 @@ class ActiveManager(models.Manager):
 #-------------------------------------------------------------------------------------------
 
 class Article(models.Model):
-    title = models.CharField(max_length = 100)
+    title = models.CharField(max_length = 100, unique=True)
     author = models.CharField(max_length = 100)
     date_published = models.DateTimeField()
     text = models.TextField()
     art_picture = models.ImageField(upload_to = 'art_pict')
     #tags = TaggableManager()
-    slug = models.SlugField(null = True, blank = True)
+    slug = models.SlugField(null = True, blank = True, unique = True)
     is_active = models.BooleanField()
     categorie = models.ForeignKey('Index.Category')
     objects = ActiveManager()
@@ -30,6 +30,9 @@ class Article(models.Model):
         verbose_name_plural = 'Articole'
     def __unicode__(self):
         return u'%s' %self.title
+
+    def get_absolute_url(self):
+        return reverse('post_view', args=[self.slug])
 
     def save(self):
         if not self.slug:

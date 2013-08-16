@@ -1,10 +1,37 @@
 {% extends 'Index.html' %}
-{% block content %}
-
-{% for post in category.article_set.active %}
-<div>{{post.title}}</div>
-<div>{{post.text}}</div>
-{% endfor %}
-{% endblock %}
-{%block content3%}
+{%block titlu%}
+{%for x in titlu%}
+<h1 align = "center" STYLE = 'font: 70px Tahoma, Helvetica, Arial, Sans-Serif; color: #222;
+text-shadow: 0px 2px 3px #555;'>{{x.site_title}}</h1>
+{%endfor%}
 {%endblock%}
+<div id = 'headerbar' STYLE = 'margin-top:-140px; '>
+{%block header_image%}
+{%for x in imaginebara%}
+<div ><IMG SRC = '{{ MEDIA_URL }}{{x.picture}}' STYLE = 'position:relative; LEFT:-10px; TOP :-102px; HEIGHT:100px; WIDTH:1980px; box-shadow: 10 10 30px #000000;'>
+</div>
+{%endfor%}
+{%endblock%}
+{%block content3%}
+	{%for x in category.article_set.active%}
+	
+
+	<div id = 'marte' style = 'margin-left:300px; '>
+	<IMG SRC = "{{ MEDIA_URL }}{{x.art_picture}}" STYLE = 'position:relative; TOP:280px; LEFT:80px; WIDTH:250px; HEIGHT:250px; box-shadow: 8px 5px 30px #888888;'>
+
+	</div>
+	
+	<div id = 'content' style = 'margin-right:400px; margin-left:700px; margin-bottom:-80px'>
+    <h2 align = 'center', padding = 'right' style = 'text-shadow: 8px 5px 10px #555; font:chasm;'>{{x.title}}</h2>
+	<h5 align = 'center'> <i>Postat de {{x.author}} in</br> {{x.date_published}}</i></h5>
+	<h3>{{x.text}}</h3>
+	</div>
+	 
+
+	{%endfor%}
+	{%endblock%}
+	{% block cat %}
+    {% for x in categorie %}
+    <div style = "position:relative; TOP:-1500px; color:white; LEFT:10px; font-size: 50px;"><a style = 'a:link color: white;'href = '{{x.get_absolute_url}}'>{{x.title}}</br></a> </div>
+    {% endfor %}
+    {% endblock %}

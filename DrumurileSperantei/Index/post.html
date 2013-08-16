@@ -1,0 +1,33 @@
+{%extends 'Index.html'%}
+{%block content3%}
+
+<div style = 'position:relative; LEFT:870px;TOP:150px;'>{{ post.title }}</div>
+<div style = 'WIDTH:1200px; HEIGHT:400px; position:relative;LEFT:-500px; TOP:200px; font-size:20px'>{{ post.text }}</div>
+<div ><IMG src = '{{ MEDIA_URL }}{{ post.art_picture }}'style = 'WIDTH:250px; HEIGHT:250px:'></div>
+	<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+  FB.init({
+    appId      : 'Index', // App ID
+    channelUrl : '//WWW.YOUR_DOMAIN.COM/channel.html', // Channel File
+    status     : true, // check login status
+    cookie     : true, // enable cookies to allow the server to access the session
+    xfbml      : true  // parse XFBML
+  });
+};
+
+(function(d){
+  var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement('script'); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js";
+  ref.parentNode.insertBefore(js, ref);
+}(document));
+</script>
+<div style = 'position:relative; TOP:100px; LEFT:-200px '
+   class="fb-comments" 
+   data-href="{{ Article.slug }}" 
+   data-num-posts="2" 
+   data-width="470"></div>
+
+{%endblock%}  
